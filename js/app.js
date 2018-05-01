@@ -4,16 +4,17 @@ new Vue({
         myHealth: 100,
         monsterHealth: 100,
         actionList: [],
+        gameIsStarted: false
     },
     
     computed: {
         checkHealth: function() {
             if (this.myHealth <= 0) {
                 alert("You have died. The monster has won");
-                this.startNewGame();
+                this.gameIsStarted = false;
             } else if (this.monsterHealth <= 0) {
                 alert("You have killed the monster...you win!");
-                this.startNewGame();
+                this.gameIsStarted = false;
             } else {
                 return
             }
@@ -46,6 +47,7 @@ new Vue({
       
         },
         startNewGame: function() {
+            this.gameIsStarted = true;
             this.myHealth = 100;
             this.monsterHealth = 100;
             this.actionList = [];
@@ -63,8 +65,8 @@ new Vue({
             this.checkHealth;      
         },
         giveUp: function() {
-            alert("You have given up! Game will reset now...");
-            this.startNewGame();
+            alert("You have given up! Game over!");
+            this.gameIsStarted = false;
         }
     },
     watch: {
