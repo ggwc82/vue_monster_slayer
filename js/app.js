@@ -16,7 +16,7 @@ new Vue({
                 alert("You have killed the monster...you win!");
                 this.gameIsStarted = false;
             } else {
-                return
+                return;
             }
         }
     },
@@ -25,24 +25,24 @@ new Vue({
             // my attack
             var myAttack = Math.floor(Math.random() * 10) + 1;
             this.monsterHealth -= myAttack;
-            this.actionList.push("PLAYER HITS MONSTER FOR " + myAttack);
+            this.actionList.unshift({'playerTurn': true, 'text': "PLAYER HITS MONSTER FOR " + myAttack});
 
             // monster attack
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
-            this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
+            this.actionList.unshift({'playerTurn': false, 'text': "MONSTER HITS PLAYER FOR " + monsterAttack});
             this.checkHealth;
         },
         beginSpecialAttack: function() {
             // my special attack
             var myAttack = Math.floor(Math.random() * 10) + 10;
             this.monsterHealth -= myAttack;
-            this.actionList.push("PLAYER HITS MONSTER FOR " + myAttack);
+            this.actionList.unshift({'playerTurn': true, 'text': "PLAYER HITS MONSTER FOR " + myAttack});
             
             // monster attack
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
-            this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
+            this.actionList.unshift({'playerTurn': false, 'text': "MONSTER HITS PLAYER FOR " + monsterAttack});
             this.checkHealth;
       
         },
@@ -54,14 +54,17 @@ new Vue({
         },
         beginHeal: function() {
             // my heal
-            var myHeal = Math.floor(Math.random() * 10) + 1;
+            var myHeal = 10;
             this.myHealth += myHeal;
-            this.actionList.push("PLAYER HEALS FOR " + myHeal);
+            if (this.myHealth > 100) {
+                this.myHealth = 100;
+            }
+            this.actionList.unshift({'playerTurn': true, 'text': "PLAYER HEALS FOR " + myHeal});
 
             // monster attack
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
-            this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
+            this.actionList.unshift({'playerTurn': false, 'text': "MONSTER HITS PLAYER FOR " + monsterAttack});
             this.checkHealth;      
         },
         giveUp: function() {

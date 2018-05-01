@@ -39,12 +39,11 @@
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="actionList.length != 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="(action, key) in actionList.slice().reverse()">
-                    <div v-if="key % 2 == 0" class="log monster-turn">{{ action }}</div>
-                    <div v-else class="log player-turn">{{ action }}</div>
+                <li v-for="action in actionList">
+                    <div :class="{ 'player-turn': action.playerTurn, 'monster-turn': !action.playerTurn }">{{ action.text }}</div>
                 </li>
             </ul>
         </div>
