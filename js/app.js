@@ -9,11 +9,9 @@ new Vue({
     computed: {
         checkHealth: function() {
             if (this.myHealth <= 0) {
-                console.log("died")
                 alert("You have died. The monster has won");
                 this.startNewGame();
             } else if (this.monsterHealth <= 0) {
-                console.log("monster dead")
                 alert("You have killed the monster...you win!");
                 this.startNewGame();
             } else {
@@ -23,7 +21,6 @@ new Vue({
     },
     methods: {
         beginAttack: function() {
-
             // my attack
             var myAttack = Math.floor(Math.random() * 10) + 1;
             this.monsterHealth -= myAttack;
@@ -33,7 +30,7 @@ new Vue({
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
             this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
-            this.checkHealth();
+            this.checkHealth;
         },
         beginSpecialAttack: function() {
             // my special attack
@@ -45,7 +42,7 @@ new Vue({
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
             this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
-            this.checkHealth();
+            this.checkHealth;
       
         },
         startNewGame: function() {
@@ -63,7 +60,7 @@ new Vue({
             var monsterAttack = Math.floor(Math.random() * 10) + 1;
             this.myHealth -= monsterAttack;
             this.actionList.push("MONSTER HITS PLAYER FOR " + monsterAttack);
-            this.checkHealth();      
+            this.checkHealth;      
         },
         giveUp: function() {
             alert("You have given up! Game will reset now...");
